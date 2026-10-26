@@ -65,7 +65,7 @@ export function AdminTicketWorkspace({
   if (!selectedTicketId || !ticketDetail) {
     return (
       <div className="lg:col-span-7">
-        <div className="bg-white rounded-xl border border-dashed border-slate-300 p-12 text-center flex flex-col items-center justify-center h-[500px]">
+        <div className="bg-white rounded-xl border border-dashed border-slate-300 p-12 text-center flex flex-col items-center justify-center h-125">
           <Shield className="w-12 h-12 text-slate-300 mb-3" />
           <h4 className="text-sm font-semibold text-slate-800">
             Select a ticket from the queue

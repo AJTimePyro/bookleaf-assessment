@@ -4,7 +4,6 @@ from sqlalchemy import Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database.connection import Base
-from models.user import User
 
 
 class Book(Base):
@@ -34,7 +33,7 @@ class Book(Base):
         "available_on", Text, nullable=True, default="[]"
     )
 
-    author: Mapped[User] = relationship(back_populates="books")
+    author = relationship("User", back_populates="books")
 
     @property
     def available_on(self) -> list[str]:

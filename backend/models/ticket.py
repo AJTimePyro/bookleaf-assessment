@@ -4,9 +4,6 @@ from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database.connection import Base
-from models.internal_note import InternalNote
-from models.ticket_message import TicketMessage
-from models.user import User
 
 
 def utc_now() -> datetime:
@@ -42,13 +39,15 @@ class Ticket(Base):
         DateTime, default=utc_now, onupdate=utc_now
     )
 
-    author: Mapped[User] = relationship(back_populates="tickets")
-    messages: Mapped[list[TicketMessage]] = relationship(
+    author = relationship("User", back_populates="tickets")
+    messages = relationship(
+        "TicketMessage",
         back_populates="ticket",
         cascade="all, delete-orphan",
         order_by="TicketMessage.created_at",
     )
-    internal_notes: Mapped[list[InternalNote]] = relationship(
+    internal_notes = relationship(
+        "InternalNote",
         back_populates="ticket",
         cascade="all, delete-orphan",
         order_by="InternalNote.created_at",

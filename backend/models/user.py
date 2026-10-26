@@ -4,8 +4,6 @@ from sqlalchemy import DateTime, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database.connection import Base
-from models.book import Book
-from models.ticket import Ticket
 
 
 def utc_now() -> datetime:
@@ -28,9 +26,5 @@ class User(Base):
     joined_date: Mapped[str | None] = mapped_column(String, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now)
 
-    books: Mapped[list[Book]] = relationship(
-        back_populates="author", cascade="all, delete-orphan"
-    )
-    tickets: Mapped[list[Ticket]] = relationship(
-        back_populates="author", cascade="all, delete-orphan"
-    )
+    books = relationship("Book", back_populates="author", cascade="all, delete-orphan")
+    tickets = relationship("Ticket", back_populates="author", cascade="all, delete-orphan")

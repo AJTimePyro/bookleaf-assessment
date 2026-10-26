@@ -5,8 +5,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from database.connection import Base, SessionLocal, engine
+from database.seed import seed_database
 from routers import auth_routes, book_routes, ticket_routes
-from services.seed_service import seed_database
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000", "https://bookleaf-assessment.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

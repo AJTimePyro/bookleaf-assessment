@@ -4,11 +4,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_DB_FILE = BASE_DIR / "database" / "bookleaf.db"
-DEFAULT_SAMPLE_DATA = BASE_DIR.parent / "sample-data.json"
+DEFAULT_SAMPLE_DATA = BASE_DIR.parent / "bookleaf_sample_data.json"
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "BookLeaf Author Support & Communication Portal"
     DATABASE_URL: str = f"sqlite:///{DEFAULT_DB_FILE}"
     SECRET_KEY: str = "bookleaf-super-secret-assessment-key-change-in-prod"
     ALGORITHM: str = "HS256"

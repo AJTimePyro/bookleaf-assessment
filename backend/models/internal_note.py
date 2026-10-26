@@ -4,7 +4,6 @@ from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database.connection import Base
-from models.ticket import Ticket
 
 
 def utc_now() -> datetime:
@@ -23,4 +22,4 @@ class InternalNote(Base):
     content: Mapped[str] = mapped_column(Text, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now)
 
-    ticket: Mapped[Ticket] = relationship(back_populates="internal_notes")
+    ticket = relationship("Ticket", back_populates="internal_notes")

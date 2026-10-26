@@ -61,6 +61,12 @@ export function BookCard({ book, onRaiseTicket }: BookCardProps) {
 
         <div className="space-y-1.5 text-xs text-slate-600">
           <div className="flex justify-between">
+            <span className="text-slate-400">Publication Date:</span>
+            <span className="font-medium text-slate-800">
+              {book.publication_date || "In Production (Pending)"}
+            </span>
+          </div>
+          <div className="flex justify-between">
             <span className="text-slate-400">Royalty Paid:</span>
             <span className="font-medium text-slate-800">
               ₹{(book.royalty_paid || 0).toLocaleString("en-IN")}
