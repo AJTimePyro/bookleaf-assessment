@@ -1,9 +1,11 @@
 from datetime import UTC, datetime
 
-from sqlalchemy import Column, DateTime, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy import DateTime, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database.connection import Base
+from models.book import Book
+from models.ticket import Ticket
 
 
 def utc_now() -> datetime:
@@ -13,18 +15,22 @@ def utc_now() -> datetime:
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    author_id = Column(String, unique=True, index=True, nullable=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    name = Column(String, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    role = Column(String, nullable=False, default="author")
-    phone = Column(String, nullable=True)
-    city = Column(String, nullable=True)
-    joined_date = Column(String, nullable=True)
-    created_at = Column(DateTime, default=utc_now)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    author_id: Mapped[str | None] = mapped_column(
+        String, unique=True, index=True, nullable=True
+    )
+    email: Mapped[str] = mapped_column(String, unique=True, index=True, nullable=False)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    hashed_password: Mapped[str] = mapped_column(String, nullable=False)
+    role: Mapped[str] = mapped_column(String, nullable=False, default="author")
+    phone: Mapped[str | None] = mapped_column(String, nullable=True)
+    city: Mapped[str | None] = mapped_column(String, nullable=True)
+    joined_date: Mapped[str | None] = mapped_column(String, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utc_now)
 
-    books = relationship("Book", back_populates="author", cascade="all, delete-orphan")
-    tickets = relationship(
-        "Ticket", back_populates="author", cascade="all, delete-orphan"
+    books: Mapped[list[Book]] = relationship(
+        back_populates="author", cascade="all, delete-orphan"
+    )
+    tickets: Mapped[list[Ticket]] = relationship(
+        back_populates="author", cascade="all, delete-orphan"
     )
