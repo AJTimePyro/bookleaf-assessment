@@ -9,7 +9,7 @@ interface AdminConversationProps {
   replyText: string;
   sendingReply: boolean;
   onReplyTextChange: (text: string) => void;
-  onSendReply: (e: React.FormEvent) => void;
+  onSendReply: (e: React.SubmitEvent) => void;
 }
 
 export function AdminConversation({

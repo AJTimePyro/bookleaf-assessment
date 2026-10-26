@@ -9,7 +9,7 @@ interface InternalNotesProps {
   noteText: string;
   savingNote: boolean;
   onNoteTextChange: (text: string) => void;
-  onAddNote: (e: React.FormEvent) => void;
+  onAddNote: (e: React.SubmitEvent) => void;
 }
 
 export function InternalNotes({

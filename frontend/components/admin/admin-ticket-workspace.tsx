@@ -9,6 +9,7 @@ import { AiDraftBox } from "@/components/admin/ai-draft-box";
 import { AuthorContextCard } from "@/components/admin/author-context-card";
 import { InternalNotes } from "@/components/admin/internal-notes";
 import { StatusAssigneeBar } from "@/components/admin/status-assignee-bar";
+import { getStatusBadge } from "@/lib/badges";
 import type { TicketDetail, User } from "@/types";
 
 interface AdminTicketWorkspaceProps {
@@ -32,25 +33,10 @@ interface AdminTicketWorkspaceProps {
   onGenerateDraft: () => void;
   onInsertDraft: (draft: string) => void;
   onReplyTextChange: (text: string) => void;
-  onSendReply: (e: React.FormEvent) => void;
+  onSendReply: (e: React.SubmitEvent) => void;
   onNoteTextChange: (text: string) => void;
-  onAddNote: (e: React.FormEvent) => void;
+  onAddNote: (e: React.SubmitEvent) => void;
 }
-
-const getStatusBadge = (s: string) => {
-  switch (s) {
-    case "Open":
-      return "bg-blue-50 text-blue-700 border-blue-200";
-    case "In Progress":
-      return "bg-amber-50 text-amber-700 border-amber-200";
-    case "Resolved":
-      return "bg-emerald-50 text-emerald-700 border-emerald-200";
-    case "Closed":
-      return "bg-slate-100 text-slate-600 border-slate-200";
-    default:
-      return "bg-slate-100 text-slate-600";
-  }
-};
 
 export function AdminTicketWorkspace({
   selectedTicketId,

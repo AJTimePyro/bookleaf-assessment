@@ -54,7 +54,7 @@ export function BookCard({ book, onRaiseTicket }: BookCardProps) {
               Royalty Earned
             </span>
             <span className="text-sm font-semibold text-emerald-700">
-              ₹{book.total_royalty_earned.toLocaleString("en-IN")}
+              ₹{(book.total_royalty_earned || 0).toLocaleString("en-IN")}
             </span>
           </div>
         </div>
@@ -63,13 +63,13 @@ export function BookCard({ book, onRaiseTicket }: BookCardProps) {
           <div className="flex justify-between">
             <span className="text-slate-400">Royalty Paid:</span>
             <span className="font-medium text-slate-800">
-              ₹{book.royalty_paid.toLocaleString("en-IN")}
+              ₹{(book.royalty_paid || 0).toLocaleString("en-IN")}
             </span>
           </div>
           <div className="flex justify-between">
             <span className="text-slate-400">Royalty Pending:</span>
             <span className="font-semibold text-slate-900">
-              ₹{book.royalty_pending.toLocaleString("en-IN")}
+              ₹{(book.royalty_pending || 0).toLocaleString("en-IN")}
             </span>
           </div>
           {book.last_royalty_payout_date && (
